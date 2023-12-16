@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import SectionTitel from '../../../Components/SectionTitel';
 import fetcherd from '../../../assets/home/featured.jpg'
 import './Fectured.css'
@@ -22,7 +23,7 @@ const Fectured = () => {
                               <p> Aug 20 , 2029</p>
                               <p>WHERE CAN I GET SOME?</p>
                               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
-                              <button className="btn border-0 border-b-4 border-white text-white btn-outline">Read More</button>
+                              <Link to="/menu"><button className="btn border-0 border-b-4 border-white text-white btn-outline">Order Now</button></Link>
                          </div>
                     </div>
                </div>

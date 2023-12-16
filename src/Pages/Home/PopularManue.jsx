@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
+
 import SectionTitel from "../../Components/SectionTitel";
+import useMenu from "../../Hooks/UseMenu";
 import MemuItem from "../Shared/MemuItem";
 
 
 const PopularManue = () => {
-     const [menu, setMenu] = useState([]);
-
-     useEffect(() => {
-          fetch('menu.json')
-               .then(res => res.json())
-               .then(data => {
-                    const popularItems = data.filter(item => item.category === 'popular')
-                    setMenu(popularItems)
-               })
-     }, [])
+     const [menu] = useMenu();
+     const popular = menu.filter(item => item.category === 'popular' )
 
      return (
           <section className="container mx-auto px-4 py-10">
@@ -25,7 +18,7 @@ const PopularManue = () => {
 
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {
-                         menu.map(item => <MemuItem
+                         popular.map(item => <MemuItem
                               key={item._id}
                               item={item}
                          ></MemuItem>)
