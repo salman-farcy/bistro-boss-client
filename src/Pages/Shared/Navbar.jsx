@@ -3,14 +3,16 @@ import Logo from '../../../public/logo.png'
 import useAuth from "../../Hooks/useAuth";
 import userProfile from "../../assets/others/profile.png";
 import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../Hooks/useCart";
 
 
 const Navbar = () => {
-     const { user, logOut } = useAuth()
+     const { user, logOut } = useAuth();
+     const [cart] = useCart()
 
      const handleLogout = () => {
           logOut()
-               .then(() => { })
+               .then(() => {})
                .catch(error => console.log(error))
      }
 
@@ -35,7 +37,7 @@ const Navbar = () => {
                <Link to="/">
                     <button className="btn">
                          <FaCartShopping fontSize={30} className="mr-2"/>
-                         <div className="badge badge-secondary">+0</div>
+                         <div className="badge badge-secondary">+{cart.length}</div>
                     </button>
                </Link>
           </li>
