@@ -1,46 +1,47 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import toast from 'react-hot-toast';
-// import axios from "axios";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useCart from "../Hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
-     const {_id, name, recipe, image, price } = item;
-     const {user} = useAuth()
+     const { _id, name, recipe, image, price } = item;
+     const { user } = useAuth()
      const navigate = useNavigate();
      const location = useLocation()
      const axiosSecureForThe = useAxiosSecure()
+     const [, refetch] = useCart()
 
-
-     const handleAddToCart = food => {
-          // console.log(food, user.email);
-          if(user && user.email){
-               //TODO: send cart item to the database
-               console.log(user.email, food);
+     const handleAddToCart = () => {
+          if (user && user.email) {
+               // send cart item to the database
                const cardItem = {
                     menuId: _id,
                     email: user.email,
-                    name, 
+                    name,
                     image,
                     price
                }
 
                axiosSecureForThe.post('/carts', cardItem)
-               .then(res => {
-                    console.log(res.data);
-                    if(res.data.insertedId){
-                         toast.success('Cart Add Successfully');
-                    }
-               })
+                    .then(res => {
+                         console.log(res.data);
+                         if (res.data.insertedId) {
+                              toast.success('Cart Add Successfully');
+
+                              // refetch cart to update the cart items count
+                              refetch()
+                         }
+                    })
 
           }
-          else{
+          else {
                toast.error('Plz Login to able to the cart ?')
                //send the user to the login page
-               navigate('/login', {state: {from: location}})
+               navigate('/login', { state: { from: location } })
           }
-          
+
      }
 
      return (
@@ -52,7 +53,7 @@ const FoodCard = ({ item }) => {
                     <p>{price}</p>
                     <div className="card-actions justify-end">
                          <button
-                              onClick={() => handleAddToCart(item)}
+                              onClick={handleAddToCart}
                               className="btn bg-gray-500 text-white">
                               Add To Cart</button>
                     </div>
