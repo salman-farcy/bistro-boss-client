@@ -34,7 +34,7 @@ const Navbar = () => {
                     : <><li className="text-white"><Link to="/login">Login</Link></li></>
           }
           <li>
-               <Link to="/">
+               <Link to="/dashbord/cart">
                     <button className="btn">
                          <FaCartShopping fontSize={30} className="mr-2"/>
                          <div className="badge badge-secondary">+{cart.length}</div>
