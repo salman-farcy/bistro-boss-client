@@ -3,7 +3,7 @@ import useCart from "../../Hooks/useCart";
 
 const Cart = () => {
      const [cart] = useCart();
-     
+     const totalPrice = cart.reduce((total, item) => total + item.price, 0 )
      return (
           <div>
               <div className="">
