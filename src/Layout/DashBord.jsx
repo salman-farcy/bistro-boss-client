@@ -74,7 +74,7 @@ const DashBord = () => {
                          </ul>
                     </div>
 
-                    <div className="flex-1 px-5 ">
+                    <div className="flex-1 px-5 pb-5">
                          <div className="bg-red-100 mb-5">
                               <SectionTitel subHeading={"---My Cart---"} heading={"WANNA ADD MORE?"}></SectionTitel>
                          </div>

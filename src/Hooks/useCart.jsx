@@ -8,6 +8,8 @@ const useCart = () => {
    const axiosSecure = useAxiosSecure();
    const {user} = useAuth();
 
+
+   //TanStack Query use
    const { refetch, data: cart = []} = useQuery({
 
       queryKey: ['cart', user?.email],
@@ -17,6 +19,8 @@ const useCart = () => {
          return res.data;
       }
    })
+
+
 
    return [cart, refetch]
 };
