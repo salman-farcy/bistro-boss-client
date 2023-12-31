@@ -7,11 +7,13 @@ import { FaPersonSkiingNordic } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
 import { AiFillHome } from "react-icons/ai";
 import SectionTitel from "../Components/SectionTitel";
+import useCart from "../Hooks/useCart";
 
 
 
 
 const DashBord = () => {
+     const [cart] = useCart()
      return (
           <div className=" ">
                <Helmet>
@@ -35,7 +37,7 @@ const DashBord = () => {
 
                               <li>
                                    <NavLink to="/dashbord/cart">
-                                        <FaCartShopping fontSize={30} className="mr-2" /> My Cart
+                                        <FaCartShopping fontSize={30} className="mr-2" /> My Cart <span className="badge">{cart.length}</span>
                                    </NavLink>
                               </li>
 
