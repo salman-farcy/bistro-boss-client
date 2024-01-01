@@ -24,9 +24,11 @@ const SignUp = () => {
                     toast.success('User SignUp Successfully');
                     navigate('/')
 
-                    // Update Your Profile
+                    //? Update Your Profile
                     updateUserProflie(data.name, data.photoURL)
                          .then(() => {
+                              //?create user entry in the database
+                              
                               toast.success('User Update Successfully');
                               reset();
                               navigate('/')

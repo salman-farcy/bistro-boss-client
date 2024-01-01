@@ -1,12 +1,12 @@
 import { FaTrash } from "react-icons/fa6";
 import useCart from "../../Hooks/useCart";
 import Swal from 'sweetalert2'
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
 
 
 const Cart = () => {
      const [cart, refetch] = useCart();
-     const totalPrice = cart.reduce( (total, item) => total + item.price, 0);
+     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
      const totalPriceFloor = Math.floor(totalPrice)
      const axiosSecure = useAxiosSecure()
 
@@ -23,7 +23,10 @@ const Cart = () => {
                confirmButtonText: "Yes, delete it!"
           }).then((result) => {
                if (result.isConfirmed) {
+
+                    //data fatch
                     axiosSecure.delete(`/carts/${id}`)
+
                          .then(res => {
                               console.log(res);
 
@@ -51,7 +54,7 @@ const Cart = () => {
                     <button className=" bg-red-100 px-5 py-2 hover:bg-red-200">Pay</button>
                </div>
 
-               <div className="overflow-x-auto  ">
+               <div className="overflow-x-auto  max-h-[460px] overflow-y-auto">
                     <table className="table ">
                          {/* head */}
                          <thead className="bg-red-200">
@@ -69,9 +72,9 @@ const Cart = () => {
                               </tr>
                          </thead>
 
-                         <tbody>
+                         <tbody className="">
                               {
-                                   cart.map((item, index) => <tr className="overflow-y-hidden" key={item._id}>
+                                   cart.map((item, index) => <tr className="" key={item?._id}>
                                         <th>
                                              {index + 1}
                                         </th>
@@ -79,7 +82,7 @@ const Cart = () => {
                                              <div className="flex items-center gap-3">
                                                   <div className="avatar">
                                                        <div className="mask  w-12 h-12">
-                                                            <img src={item.image} />
+                                                            <img src={item?.image} />
                                                        </div>
                                                   </div>
                                                   <div>
@@ -95,7 +98,7 @@ const Cart = () => {
                                         </td>
                                         <td>Purple</td>
                                         <th>
-                                             <button onClick={() => handleDelet(item._id)} className="btn btn-ghost btn-md">
+                                             <button onClick={() => handleDelet(item?._id)} className="btn btn-ghost btn-md">
                                                   <FaTrash className="text-red-500"></FaTrash>
                                              </button>
                                         </th>

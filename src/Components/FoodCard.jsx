@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import toast from 'react-hot-toast';
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useCart from "../Hooks/useCart";
+import useAxiosSecure from "../Hooks/axiosSecureHook/useAxiosSecure";
 
 
 const FoodCard = ({ item }) => {
