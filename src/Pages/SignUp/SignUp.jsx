@@ -1,19 +1,18 @@
-import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import loginImagesh from '../../assets/others/authentication2.png'
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/axiosPublickHook/useAxiosPublic";
+
 
 
 const SignUp = () => {
      const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: { email: "@gmail.com" } });
      const { createUser, updateUserProflie } = useAuth()
      const navigate = useNavigate()
-     // const location = useLocation()
-
-     // const from = location.state?.from?.pathname || "/";
+     const axiosPublic = useAxiosPublic();
 
      const onSubmit = (data) => {
           console.log(data)
@@ -21,20 +20,26 @@ const SignUp = () => {
                .then(result => {
                     const loggedUser = result.user
                     console.log(loggedUser);
-                    toast.success('User SignUp Successfully');
-                    navigate('/')
 
                     //? Update Your Profile
-                    updateUserProflie(data.name, data.photoURL)
-                         .then(() => {
-                              //?create user entry in the database
-                              
-                              toast.success('User Update Successfully');
-                              reset();
-                              navigate('/')
+                    updateUserProflie(data?.name, data?.photoURL)
+                    //?create user entry in the database
+                    const userInfo = {
+                         name: data.name,
+                         email: data.email,
+                         password: data.password,
+                         photo: data.photoURL
+                    }
+                    axiosPublic.post('/users', userInfo)
+                         .then(res => {
+                              if (res.data.insertedId) {
+                                   console.log('user added to the database');
+                                   reset();
+                                   toast.success('User Update Successfully');
+                                   navigate('/')
+                              }
                          })
                          .catch(error => console.log(error))
-
                })
      }
 
