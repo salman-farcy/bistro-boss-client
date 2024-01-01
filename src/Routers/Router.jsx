@@ -38,7 +38,7 @@ const bistroRouter = createBrowserRouter([
      },
      {
           path: 'dashbord',
-          element: <DashBord />,
+          element: <PrivateRpute><DashBord /></PrivateRpute>,
           children: [
                {
                     path: 'cart',

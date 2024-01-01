@@ -7,6 +7,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import useAuth from '../../Hooks/useAuth';
 import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
+import SocailLogn from '../../Components/SocailLogn';
 
 const Login = () => {
      //* state control component
@@ -156,6 +157,8 @@ const Login = () => {
                                    >
                                         <p>LogIn</p>
                                    </button>
+                                   <div className="divider divider-error"></div> 
+                                   <SocailLogn />
                               </div>
                          </form>
 
@@ -186,8 +189,10 @@ const Login = () => {
                               >
                                    Sign Up
                               </Link>
-                              .
+                              
                          </p>
+
+                         
                     </div>
                </div>
           </>

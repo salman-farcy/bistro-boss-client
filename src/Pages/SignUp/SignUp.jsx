@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/axiosPublickHook/useAxiosPublic";
+import SocailLogn from "../../Components/SocailLogn";
 
 
 
@@ -42,12 +43,6 @@ const SignUp = () => {
                          .catch(error => console.log(error))
                })
      }
-
-
-
-
-
-
 
      return (
           <>
@@ -164,6 +159,8 @@ const SignUp = () => {
                                    >
                                         <p>Sign Up</p>
                                    </button>
+                                   <div className="divider divider-error"></div> 
+                                   <SocailLogn />
                               </div>
                          </form>
 
