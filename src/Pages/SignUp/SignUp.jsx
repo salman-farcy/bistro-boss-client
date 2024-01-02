@@ -1,6 +1,6 @@
 import useAuth from "../../Hooks/useAuth";
 import loginImagesh from '../../assets/others/authentication2.png'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
@@ -12,8 +12,12 @@ import SocailLogn from "../../Components/SocailLogn";
 const SignUp = () => {
      const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: { email: "@gmail.com" } });
      const { createUser, updateUserProflie } = useAuth()
-     const navigate = useNavigate()
      const axiosPublic = useAxiosPublic();
+     const navigate = useNavigate()
+     const location = useLocation()
+
+     const from = location.state?.from?.pathname || "/";
+     console.log('state in the Location Login page ', location.state);
 
      const onSubmit = (data) => {
           console.log(data)
@@ -37,7 +41,7 @@ const SignUp = () => {
                                    console.log('user added to the database');
                                    reset();
                                    toast.success('User Update Successfully');
-                                   navigate('/')
+                                   navigate(from, {replace: true})
                               }
                          })
                          .catch(error => console.log(error))
