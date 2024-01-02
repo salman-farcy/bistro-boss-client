@@ -10,6 +10,7 @@ import PrivateRpute from "./PrivateRpute";
 import DashBord from "../Layout/DashBord";
 import Cart from "../Pages/Dashbord/Cart";
 import UserHome from "../Pages/Dashbord/UserHome";
+import AllUsers from "../Pages/Dashbord/AllUsers";
 
 
 const bistroRouter = createBrowserRouter([
@@ -47,7 +48,15 @@ const bistroRouter = createBrowserRouter([
                {
                     path: 'userhome',
                     element: <UserHome />
-               }
+               },
+
+
+               // Admin routes
+               {
+                    path: 'allusers',
+                    element: <AllUsers />
+               },
+               
           ]
      },
      {
