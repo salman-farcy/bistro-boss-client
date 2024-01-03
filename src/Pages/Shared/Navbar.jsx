@@ -22,6 +22,7 @@ const Navbar = () => {
           <li className="text-white"><Link to="/menu">Menu</Link></li>
           <li className="text-white"><Link to="order/salad">Order</Link></li>
           <li className="text-white"><Link to="/secret">Secret</Link></li>
+          <li className="text-white"><Link to="/dashbord">Dashbord</Link></li>
 
 
           {
