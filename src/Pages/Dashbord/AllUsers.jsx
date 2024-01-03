@@ -4,11 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
 import { FaTrash } from "react-icons/fa";
 import { HiMiniUserGroup } from "react-icons/hi2";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 const AllUsers = () => {
      const axiosSecure = useAxiosSecure()
-     const { data: users = [] } = useQuery({
+     const { refetch, data: users = [] } = useQuery({
           queryKey: ['users'],
           queryFn: async () => {
                const res = await axiosSecure.get('/users');
@@ -16,7 +18,58 @@ const AllUsers = () => {
           }
      })
 
-     
+     //User Delete Operation
+     const handleDeletUser = user => {
+          console.log('deleted', user);
+
+          Swal.fire({
+               title: "Are you sure?",
+               text: "You won't be able to revert this!",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#3085d6",
+               cancelButtonColor: "#d33",
+               confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+               if (result.isConfirmed) {
+
+                    //data fatch
+                    axiosSecure.delete(`/users/${user?._id}`)
+
+                         .then(res => {
+                              console.log(res);
+
+                              if (res.data.deletedCount > 0) {
+                                   refetch()
+                                   Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                   });
+                              }
+
+                         })
+               }
+          });
+     }
+
+     const handleMakeAdmin = user => {
+          axiosSecure.patch(`/users/admin/${user?._id}`)
+               .then(res => {
+                    console.log(res.data);
+                    if (res.data.modifiedCount > 0) {
+                         refetch()
+                         Swal.fire({
+                              position: "top-end",
+                              icon: "success",
+                              title: `${user?.name} is an admin now`,
+                              showConfirmButton: false,
+                              timer: 1500
+                         });
+                    }
+
+               })
+     }
 
      return (
           <div>
@@ -52,13 +105,15 @@ const AllUsers = () => {
                                         <td>{user?.name}</td>
                                         <td>{user?.email}</td>
 
+                                        {
+                                             user.role === 'admin' ? 'Admin' : <td>
+                                                  <button onClick={() => handleMakeAdmin(user)} className="bg-red-300 hover:outline text-white p-2 rounded-sm">
+                                                       <HiMiniUserGroup />
+                                                  </button>
+                                             </td>
+                                        }
                                         <td>
-                                             <button className="bg-red-300 hover:outline text-white p-2 rounded-sm">
-                                                  <HiMiniUserGroup />
-                                             </button>
-                                        </td>
-                                        <td>
-                                             <button  className="bg-red-500 hover:outline text-white p-2 rounded-sm">
+                                             <button onClick={() => handleDeletUser(user)} className="bg-red-500 hover:outline text-white p-2 rounded-sm">
                                                   <FaTrash />
                                              </button>
                                         </td>
