@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
 import { FaTrash } from "react-icons/fa";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import Swal from "sweetalert2";
-import toast from "react-hot-toast";
+
 
 
 const AllUsers = () => {
@@ -13,7 +13,11 @@ const AllUsers = () => {
      const { refetch, data: users = [] } = useQuery({
           queryKey: ['users'],
           queryFn: async () => {
-               const res = await axiosSecure.get('/users');
+               const res = await axiosSecure.get('/users', {
+                    headers: {
+                         authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+               });
                return res.data;
           }
      })
@@ -35,7 +39,6 @@ const AllUsers = () => {
 
                     //data fatch
                     axiosSecure.delete(`/users/${user?._id}`)
-
                          .then(res => {
                               console.log(res);
 
@@ -53,6 +56,7 @@ const AllUsers = () => {
           });
      }
 
+     //admin create and patch opration
      const handleMakeAdmin = user => {
           axiosSecure.patch(`/users/admin/${user?._id}`)
                .then(res => {
