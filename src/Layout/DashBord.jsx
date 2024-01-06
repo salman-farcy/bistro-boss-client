@@ -14,6 +14,7 @@ import { ImSpoonKnife } from "react-icons/im";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { FaBook } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
+import useAdmin from "../Hooks/useAdmin";
 
 
 
@@ -21,8 +22,7 @@ import { HiUserGroup } from "react-icons/hi";
 const DashBord = () => {
      const [cart] = useCart()
 
-     //TODO: get is isAdmin value from the database
-     const isAdmin = true;
+     const [isAdmin] = useAdmin();
 
 
      return (
