@@ -22,11 +22,11 @@ const Login = () => {
      const location = useLocation()
 
      const from = location.state?.from?.pathname || "/";
-     console.log('state in the Location Login page ', location.state);
+     // console.log('state in the Location Login page ', location.state);
      
 
      useEffect(() => {
-          loadCaptchaEnginge(6);
+          loadCaptchaEnginge(4);
      }, [])
 
      const handleLogin = event => {

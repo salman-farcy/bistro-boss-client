@@ -61,7 +61,7 @@ const DashBord = () => {
                                         </li>
 
                                         <li>
-                                             <NavLink to="/dashbord/allusers">
+                                             <NavLink to="/dashbord/users">
                                                   <HiUserGroup fontSize={30} className="mr-2" /> All Users
                                              </NavLink>
                                         </li>

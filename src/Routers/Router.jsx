@@ -6,11 +6,12 @@ import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Secret from "../Pages/Shared/Secret";
-import PrivateRpute from "./PrivateRpute";
 import DashBord from "../Layout/DashBord";
 import Cart from "../Pages/Dashbord/Cart";
 import UserHome from "../Pages/Dashbord/UserHome";
 import AllUsers from "../Pages/Dashbord/AllUsers";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
 
 
 const bistroRouter = createBrowserRouter([
@@ -39,7 +40,7 @@ const bistroRouter = createBrowserRouter([
      },
      {
           path: 'dashbord',
-          element: <PrivateRpute><DashBord /></PrivateRpute>,
+          element: <PrivateRoute><DashBord /></PrivateRoute>,
           children: [
                {
                     path: 'cart',
@@ -53,8 +54,8 @@ const bistroRouter = createBrowserRouter([
 
                // Admin routes
                {
-                    path: 'allusers',
-                    element: <AllUsers />
+                    path: 'users',
+                    element: <AdminRoute><AllUsers /></AdminRoute>
                },
                
           ]
@@ -65,7 +66,7 @@ const bistroRouter = createBrowserRouter([
      },
      {
           path: 'secret',
-          element: <PrivateRpute><Secret /></PrivateRpute> 
+          element: <PrivateRoute><Secret /></PrivateRoute> 
      }
 ])
 

@@ -5,7 +5,7 @@ import useAuth from "../Hooks/useAuth";
 
 
 
-const PrivateRpute = ({children}) => {
+const PrivateRoute = ({children}) => {
      const {user, loading} = useAuth()
      const location = useLocation()
 
@@ -18,7 +18,7 @@ const PrivateRpute = ({children}) => {
      }
 
 
-     return <Navigate to="/login" state={{from : location}} replace='true'></Navigate>
+     return <Navigate to="/login" state={{from: location}} replace='true'></Navigate>
 };
 
-export default PrivateRpute;
+export default PrivateRoute;
