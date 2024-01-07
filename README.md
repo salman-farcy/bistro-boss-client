@@ -1,8 +1,11 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Layer of Security**
 
-Currently, two official plugins are available:
+1. do not show the link to those users who should not see the link
+2. even if they get the link, do not allow them to visit the link
+3. do not allow the user to access the API. check admin in the server as well
+4. (verifyAdmmin)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   
+
