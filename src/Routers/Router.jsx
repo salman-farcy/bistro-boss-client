@@ -12,6 +12,7 @@ import UserHome from "../Pages/Dashbord/UserHome";
 import AllUsers from "../Pages/Dashbord/AllUsers";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import Additems from "../Pages/Dashbord/Additems";
 
 
 const bistroRouter = createBrowserRouter([
@@ -42,6 +43,7 @@ const bistroRouter = createBrowserRouter([
           path: 'dashbord',
           element: <PrivateRoute><DashBord /></PrivateRoute>,
           children: [
+               //User Routes
                {
                     path: 'cart',
                     element: <Cart />
@@ -52,11 +54,15 @@ const bistroRouter = createBrowserRouter([
                },
 
 
-               // Admin routes
+               // Admin Routes
+               {
+                    path: 'additems',
+                    element: <AdminRoute><Additems /></AdminRoute> 
+               },
                {
                     path: 'users',
                     element: <AdminRoute><AllUsers /></AdminRoute>
-               },
+               }
                
           ]
      },

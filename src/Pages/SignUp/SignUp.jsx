@@ -75,11 +75,11 @@ const SignUp = () => {
                               <div className='space-y-4'>
 
                                    <div>
-                                        <label htmlFor='email' className='block mb-2 text-sm'>
+                                        <label htmlFor='name' className='block mb-2 text-sm'>
                                              Name
                                         </label>
                                         <input
-                                             {...register("name", { required: true, maxLength: 7 })}
+                                             {...register("name", { required: true, maxLength: 12 })}
                                              type='name'
                                              name='name'
                                              id='name'
