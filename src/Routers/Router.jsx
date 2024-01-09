@@ -57,7 +57,8 @@ const bistroRouter = createBrowserRouter([
                // Admin Routes
                {
                     path: 'additems',
-                    element: <AdminRoute><Additems /></AdminRoute> 
+                    // element: <AdminRoute><Additems /></AdminRoute> 
+                    element: <Additems />
                },
                {
                     path: 'users',
