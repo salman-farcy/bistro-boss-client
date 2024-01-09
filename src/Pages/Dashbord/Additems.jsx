@@ -39,11 +39,11 @@ const Additems = () => {
                                    <label htmlFor="category">
                                         Category*
                                    </label>
-                                   <select {...register("category", { required: true })} type="text"
+                                   <select defaultValue="default" {...register("category", { required: true })} type="text"
                                         name="category"
                                         id="category"
                                         placeholder="Category" className='w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900'>
-                                        <option disabled >Select a category</option>
+                                        <option value="default" disabled  className="text-lg font-bold text-black">Select A Category</option>
                                         <option value="salad">Salad</option>
                                         <option value="pizza">Pizza</option>
                                         <option value="soup">Soup</option>
