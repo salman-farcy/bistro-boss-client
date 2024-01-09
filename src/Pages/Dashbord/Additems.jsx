@@ -3,6 +3,8 @@ import SectionTitel from "../../Components/SectionTitel";
 import { useForm } from "react-hook-form"
 import { ImSpoonKnife } from "react-icons/im";
 import useAxiosPublic from "../../Hooks/axiosPublickHook/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -11,6 +13,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Additems = () => {
      const { register, handleSubmit } = useForm()
      const axiosPublic = useAxiosPublic();
+     const axiosSecure = useAxiosSecure();
 
      const onSubmit = async (data) => {
           console.log(data)
@@ -22,6 +25,23 @@ const Additems = () => {
                     'content-type': 'multipart/form-data'
                }
           })
+
+          if(res.data.success){
+               const menuItem = { 
+                    name: data.name,
+                    category: data.category,
+                    price: parseFloat(data.price),
+                    recipe: data.recipe,
+                    image: res.data.data.display_url
+               }
+
+               const menuRes = await axiosSecure.post('/menu', menuItem)
+               console.log("🚀 ~ onSubmit ~ menuRes:", menuRes.data)
+               if(menuRes.data.insertedId){
+                    //show success popup
+                    toast.success('Item add is Successfull')
+               }    
+          }
           console.log(res.data)
      }
 
