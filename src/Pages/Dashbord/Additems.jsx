@@ -9,6 +9,7 @@ const Additems = () => {
      const onSubmit = (data) => {
           console.log(data)
      }
+
      return (
           <div>
                <Helmet>
@@ -19,16 +20,15 @@ const Additems = () => {
                </div>
 
                <div className="bg-red-100 p-8">
-
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                          <div className="">
-                              <label htmlFor="Recipe name">
+                              <label htmlFor="name">
                                    Recipe Name*
                               </label>
                               <input
                                    {...register("name", { required: true })}
                                    type="name"
-                                   name="Recipe name"
+                                   name="name"
                                    id="name"
                                    placeholder="Recipe Name" className='w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900' data-temp-mail-org='0'
                               />
@@ -40,7 +40,7 @@ const Additems = () => {
                                         Category*
                                    </label>
                                    <select {...register("category", { required: true })} type="text"
-                                        name="category*"
+                                        name="category"
                                         id="category"
                                         placeholder="Category" className='w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900'>
                                         <option disabled >Select a category</option>
@@ -57,7 +57,7 @@ const Additems = () => {
                                         Price*
                                    </label>
                                    <input
-                                        {...register("firstName", { required: true })}
+                                        {...register('price', { required: true })}
                                         type="text"
                                         name="price"
                                         id="price"
@@ -67,21 +67,23 @@ const Additems = () => {
                          </div>
 
                          <div className="">
-                              <label htmlFor="Recipe Details">
+                              <label htmlFor="recipe">
                                    Recipe Details*
                               </label>
                               <textarea
-                                   {...register("firstName", { required: true })}
+                                   {...register("recipe", { required: true })}
                                    type="text"
                                    rows="5" 
-                                   name="Recipe Details"
-                                   id="Recipe Details*"
+                                   name="recipe"
+                                   id="recipe"
                                    className="textarea textarea-bordered w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900" placeholder="Recipe Details">
                               </textarea>
                          </div>
 
                          <div className="">
-                              <input type="file" ></input>
+                              <input
+                              {...register('image', {required: true})}
+                               type="file" ></input>
                          </div>
                          
                          <button className='flex gap-3 px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 hover:bg-red-300 text-gray-900' type="submit">Add Item <ImSpoonKnife fontSize={30} className="mr-2" /></button>
