@@ -94,7 +94,7 @@ const AllUsers = () => {
                                    <th>Name</th>
                                    <th>Email</th>
                                    <th>Roll</th>
-                                   <th>Action</th>
+                                   <th>Delete</th>
                               </tr>
                          </thead>
                          <tbody>

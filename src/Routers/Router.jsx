@@ -13,6 +13,7 @@ import AllUsers from "../Pages/Dashbord/AllUsers";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import Additems from "../Pages/Dashbord/Additems";
+import ManageItems from "../Pages/Dashbord/ManageItems";
 
 
 const bistroRouter = createBrowserRouter([
@@ -58,6 +59,10 @@ const bistroRouter = createBrowserRouter([
                {
                     path: 'additems',
                     element: <AdminRoute><Additems /></AdminRoute> 
+               },
+               {
+                    path: 'manageitems',
+                    element: <AdminRoute><ManageItems /></AdminRoute> 
                },
                {
                     path: 'users',
