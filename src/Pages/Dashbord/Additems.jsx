@@ -11,7 +11,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Additems = () => {
-     const { register, handleSubmit } = useForm()
+     const { register, handleSubmit, reset } = useForm()
      const axiosPublic = useAxiosPublic();
      const axiosSecure = useAxiosSecure();
 
@@ -39,6 +39,7 @@ const Additems = () => {
                console.log("🚀 ~ onSubmit ~ menuRes:", menuRes.data)
                if(menuRes.data.insertedId){
                     //show success popup
+                    reset();
                     toast.success('Item add is Successfull')
                }    
           }
