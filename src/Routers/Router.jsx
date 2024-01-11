@@ -14,6 +14,7 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import Additems from "../Pages/Dashbord/Additems";
 import ManageItems from "../Pages/Dashbord/ManageItems";
+import UpdateItem from "../Pages/Dashbord/UpdateItem";
 
 
 const bistroRouter = createBrowserRouter([
@@ -63,6 +64,11 @@ const bistroRouter = createBrowserRouter([
                {
                     path: 'manageitems',
                     element: <AdminRoute><ManageItems /></AdminRoute> 
+               },
+               {
+                    path: 'updateItem/:id',
+                    element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+                    loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
                },
                {
                     path: 'users',

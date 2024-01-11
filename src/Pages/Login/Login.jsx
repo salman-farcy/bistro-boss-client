@@ -119,7 +119,7 @@ const Login = () => {
                                    </div>
 
                                    <div>
-                                        <label htmlFor='captcha' className='block mb-2 text-sm'>
+                                        <label htmlFor='text' className='block mb-2 text-sm'>
                                              <LoadCanvasTemplate />
                                         </label>
                                         <input
@@ -127,7 +127,7 @@ const Login = () => {
                                              // ref={captchaRef}
                                              type='text'
                                              name='captcha' 
-                                             id='captcha'
+                                             id='text'
                                              required
                                              placeholder='Enter Your Capca Here'
                                              className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'

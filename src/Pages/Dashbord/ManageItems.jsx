@@ -5,13 +5,14 @@ import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { FaRegPenToSquare } from "react-icons/fa6";
 import useAxiosSecure from '../../Hooks/axiosSecureHook/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 
 const ManageItems = () => {
-     const [refetch, menu, , ] = useMenu()
+     const [refetch, menu, ,] = useMenu()
      const axiosSecure = useAxiosSecure()
      //User Delete Operation
-     const handleDeleteItem =  item => {
+     const handleDeleteItem = item => {
           Swal.fire({
                title: "Are you sure?",
                text: "You won't be able to revert this!",
@@ -33,7 +34,7 @@ const ManageItems = () => {
                               title: `${item.name} has been deleted`,
                               showConfirmButton: false,
                               timer: 1500
-                            });
+                         });
                     }
                }
           });
@@ -74,9 +75,11 @@ const ManageItems = () => {
                                              <td>${item?.price}</td>
 
                                              <td>
-                                                  <button className="bg-red-300 hover:outline text-white p-2 rounded-sm">
-                                                       <FaRegPenToSquare />
-                                                  </button>
+                                                  <Link to={`/dashbord/updateItem/${item._id}`}>
+                                                       <button className="bg-red-300 hover:outline text-white p-2 rounded-sm">
+                                                            <FaRegPenToSquare />
+                                                       </button>
+                                                  </Link>
                                              </td>
 
                                              <td>
