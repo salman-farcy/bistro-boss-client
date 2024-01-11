@@ -12,7 +12,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const UpdateItem = () => {
      const { register, handleSubmit, reset } = useForm()
-     const {name, category, recipe, price} = useLoaderData()
+     const {name, category, recipe, price, _id} = useLoaderData()
      
 
      const axiosPublic = useAxiosPublic();
@@ -38,12 +38,12 @@ const UpdateItem = () => {
                     image: res.data.data.display_url
                }
 
-               const menuRes = await axiosSecure.post('/menu', menuItem)
+               const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem)
                console.log("🚀 ~ onSubmit ~ menuRes:", menuRes.data)
-               if(menuRes.data.insertedId){
+               if(menuRes.data.modifiedCount > 0){
                     //show success popup
                     reset();
-                    toast.success('Item add is Successfull')
+                    toast.success('is Updated to the menu Successfull')
                }    
           }
           console.log(res.data)
