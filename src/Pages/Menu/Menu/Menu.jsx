@@ -6,7 +6,7 @@ import dessertsimg from '../../../assets/menu/dessert-bg.jpeg'
 import pizzaimg from '../../../assets/menu/pizza-bg.jpg'
 import saladimg from '../../../assets/menu/salad-bg.jpg'
 import soupimg from '../../../assets/menu/soup-bg.jpg'
-
+import offeredimg from '../../../assets/menu/soup-bg.jpg'
 import useMenu from "../../../Hooks/UseMenu";
 import SectionTitel from "../../../Components/SectionTitel";
 import MenuCatagory from "../MenuCatagory/MenuCatagory";
@@ -20,6 +20,7 @@ const Menu = () => {
      const salad = menu.filter(item => item.category === 'salad')
      const pizza = menu.filter(item => item.category === 'pizza')
      const offered = menu.filter(item => item.category === 'offered')
+     const popular = menu.filter(item => item.category === 'popular')
      return (
           <div>
                <Helmet>
@@ -29,9 +30,18 @@ const Menu = () => {
                <Cover img={menuImg} title="Our Menu"></Cover>
                {/* main cover */}
                <SectionTitel subHeading={"Don't miss"} heading={"TODAY'S OFFER"}></SectionTitel>
-               
                {/* offered */}
-               <MenuCatagory items={offered}></MenuCatagory>
+               <MenuCatagory 
+               items={popular}
+               title={"popular"}
+               ></MenuCatagory>
+
+               {/* offered */}
+               <MenuCatagory 
+               items={offered}
+               title={"offered"}
+               img={dessertsimg}
+               ></MenuCatagory>
 
                {/* dessert menu items */}
                <MenuCatagory 

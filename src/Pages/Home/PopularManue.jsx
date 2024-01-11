@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import SectionTitel from "../../Components/SectionTitel";
 import useMenu from "../../Hooks/UseMenu";
 import MemuItem from "../Shared/MemuItem";
@@ -26,7 +27,7 @@ const PopularManue = () => {
                </div>
 
                <div className="text-center pt-5">
-                    <button className="btn border-0 border-b-4 border-gray-700 text-gray-700 btn-outline">View Full  Menu</button>
+                    <Link to='/menu'><button  className="btn border-0 border-b-4 border-gray-700 text-gray-700 btn-outline">View Full  Menu</button></Link>
                </div>
           </section>
      );
