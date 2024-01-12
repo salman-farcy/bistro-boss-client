@@ -1,10 +1,10 @@
-import useMenu from '../../Hooks/UseMenu';
+import useMenu from '../../../Hooks/UseMenu';
 import { Helmet } from 'react-helmet-async';
-import SectionTitel from '../../Components/SectionTitel';
+import SectionTitel from '../../../Components/SectionTitel';
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { FaRegPenToSquare } from "react-icons/fa6";
-import useAxiosSecure from '../../Hooks/axiosSecureHook/useAxiosSecure';
+import useAxiosSecure from '../../../Hooks/axiosSecureHook/useAxiosSecure';
 import { Link } from 'react-router-dom';
 
 

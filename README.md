@@ -10,3 +10,10 @@
    
 > **Image post in a imgbb**
 1. 
+
+
+> **Payment**
+1. install stripe and stripe react
+2. create card element
+3. create stripe account and get publishable key
+4. use publishable key and user stripe to get card infotmation and error

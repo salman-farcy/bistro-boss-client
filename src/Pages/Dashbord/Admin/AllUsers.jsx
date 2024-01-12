@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitel from "../../Components/SectionTitel";
+import SectionTitel from "../../../Components/SectionTitel";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
+import useAxiosSecure from "../../../Hooks/axiosSecureHook/useAxiosSecure";
 import { FaTrash } from "react-icons/fa";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import Swal from "sweetalert2";

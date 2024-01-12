@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitel from "../../Components/SectionTitel";
+import SectionTitel from "../../../Components/SectionTitel";
 import { useLoaderData } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../Hooks/axiosPublickHook/useAxiosPublic";
-import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
+import useAxiosPublic from "../../../Hooks/axiosPublickHook/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/axiosSecureHook/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -12,8 +12,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const UpdateItem = () => {
      const { register, handleSubmit, reset } = useForm()
-     const {name, category, recipe, price, _id} = useLoaderData()
-     
+     const { name, category, recipe, price, _id } = useLoaderData()
+
 
      const axiosPublic = useAxiosPublic();
      const axiosSecure = useAxiosSecure();
@@ -22,15 +22,15 @@ const UpdateItem = () => {
           console.log(data)
 
           //image upload to imagbb and then get an url
-          const imageFile = {image: data.image[0]}
+          const imageFile = { image: data.image[0] }
           const res = await axiosPublic.post(image_hosting_api, imageFile, {
                headers: {
                     'content-type': 'multipart/form-data'
                }
           })
 
-          if(res.data.success){
-               const menuItem = { 
+          if (res.data.success) {
+               const menuItem = {
                     name: data.name,
                     category: data.category,
                     price: parseFloat(data.price),
@@ -40,11 +40,11 @@ const UpdateItem = () => {
 
                const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem)
                console.log("🚀 ~ onSubmit ~ menuRes:", menuRes.data)
-               if(menuRes.data.modifiedCount > 0){
+               if (menuRes.data.modifiedCount > 0) {
                     //show success popup
                     reset();
                     toast.success('is Updated to the menu Successfull')
-               }    
+               }
           }
           console.log(res.data)
      }

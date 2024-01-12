@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitel from "../../Components/SectionTitel";
+import SectionTitel from "../../../Components/SectionTitel";
 import { useForm } from "react-hook-form"
 import { ImSpoonKnife } from "react-icons/im";
-import useAxiosPublic from "../../Hooks/axiosPublickHook/useAxiosPublic";
-import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
+import useAxiosPublic from "../../../Hooks/axiosPublickHook/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/axiosSecureHook/useAxiosSecure";
 import toast from "react-hot-toast";
 
 
@@ -19,15 +19,15 @@ const Additems = () => {
           console.log(data)
 
           //image upload to imagbb and then get an url
-          const imageFile = {image: data.image[0]}
+          const imageFile = { image: data.image[0] }
           const res = await axiosPublic.post(image_hosting_api, imageFile, {
                headers: {
                     'content-type': 'multipart/form-data'
                }
           })
 
-          if(res.data.success){
-               const menuItem = { 
+          if (res.data.success) {
+               const menuItem = {
                     name: data.name,
                     category: data.category,
                     price: parseFloat(data.price),
@@ -37,11 +37,11 @@ const Additems = () => {
 
                const menuRes = await axiosSecure.post('/menu', menuItem)
                console.log("🚀 ~ onSubmit ~ menuRes:", menuRes.data)
-               if(menuRes.data.insertedId){
+               if (menuRes.data.insertedId) {
                     //show success popup
                     reset();
                     toast.success('Item add is Successfull')
-               }    
+               }
           }
           console.log(res.data)
      }
@@ -79,7 +79,7 @@ const Additems = () => {
                                         name="category"
                                         id="category"
                                         placeholder="Category" className='w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900'>
-                                        <option value="default" disabled  className="text-lg font-bold text-black">Select A Category</option>
+                                        <option value="default" disabled className="text-lg font-bold text-black">Select A Category</option>
                                         <option value="salad">Salad</option>
                                         <option value="pizza">Pizza</option>
                                         <option value="soup">Soup</option>
@@ -111,7 +111,7 @@ const Additems = () => {
                               <textarea
                                    {...register("recipe", { required: true })}
                                    type="text"
-                                   rows="5" 
+                                   rows="5"
                                    name="recipe"
                                    id="recipe"
                                    className="textarea textarea-bordered w-full px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 text-gray-900" placeholder="Recipe Details">
@@ -120,10 +120,10 @@ const Additems = () => {
 
                          <div className="">
                               <input
-                              {...register('image', {required: true})}
-                               type="file" ></input>
+                                   {...register('image', { required: true })}
+                                   type="file" ></input>
                          </div>
-                         
+
                          <button className='flex gap-3 px-3 py-2 border rounded-md border-red-300 focus:outline-red-300 bg-red-200 hover:bg-red-300 text-gray-900' type="submit">Add Item <ImSpoonKnife fontSize={30} className="mr-2" /></button>
                     </form>
                </div>

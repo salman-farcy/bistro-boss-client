@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import SectionTitel from "../../Components/SectionTitel";
+import SectionTitel from "../../../Components/SectionTitel";
 
 
 const UserHome = () => {
      return (
           <div>
-                <div className="bg-red-100 mb-5">
+               <div className="bg-red-100 mb-5">
                     <SectionTitel subHeading={"---My Cart---"} heading={"WANNA ADD MORE?"}></SectionTitel>
                </div>
 

@@ -1,9 +1,10 @@
 import { FaTrash } from "react-icons/fa6";
-import useCart from "../../Hooks/useCart";
+import useCart from "../../../Hooks/useCart";
 import Swal from 'sweetalert2'
-import useAxiosSecure from "../../Hooks/axiosSecureHook/useAxiosSecure";
-import SectionTitel from "../../Components/SectionTitel";
+import useAxiosSecure from "../../../Hooks/axiosSecureHook/useAxiosSecure";
+import SectionTitel from "../../../Components/SectionTitel";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 
 const Cart = () => {
@@ -62,10 +63,12 @@ const Cart = () => {
                     <div className="flex justify-between p-5">
                          <h2 className="text-3xl font-semibold">Items: {cart.length}</h2>
                          <h2 className="text-3xl font-semibold">Items Price: ${totalPriceFloor}</h2>
-                         <button className=" bg-red-100 px-5 py-2 hover:bg-red-200">Pay</button>
+                         <Link to="/dashbord/payment">
+                              <button disabled={!cart.length}  className=" bg-red-200 px-5 py-2 hover:bg-red-300 disabled:bg-gray-300">Pay</button>
+                         </Link>
                     </div>
 
-                    <div className="overflow-x-auto  max-h-[460px] overflow-y-auto">
+                    <div className="overflow-x-auto  max-h-[500px] overflow-y-auto">
                          <table className="table ">
                               {/* head */}
                               <thead className="bg-red-200">
