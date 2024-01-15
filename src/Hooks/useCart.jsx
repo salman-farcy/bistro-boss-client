@@ -10,7 +10,7 @@ const useCart = () => {
 
 
    //TanStack Query use
-   const { refetch, data: cart = [] } = useQuery({
+   const {  data: cart = [], refetch} = useQuery({
 
       queryKey: ['cart', user?.email],
 

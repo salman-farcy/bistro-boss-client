@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/axiosSecureHook/useAxiosSecure";
 import useCart from "../../../../Hooks/useCart";
 import useAuth from "../../../../Hooks/useAuth";
+import toast from 'react-hot-toast';
 
 
 const CheckoutForm = () => {
@@ -12,17 +13,19 @@ const CheckoutForm = () => {
      const stripe = useStripe()
      const elements = useElements()
      const axiosSecure = useAxiosSecure()
-     const {user} = useAuth()
-     const [cart] = useCart()
+     const { user } = useAuth()
+     const [cart, refetch] = useCart()
      const totalPrice = cart.reduce((total, item) => total + item.price, 0)
-     
-     
+
+
      useEffect(() => {
-          const res = axiosSecure.post('/create-payment-intent', { price: totalPrice })
-               .then(res => {
-                    console.log(res.data.clientSecret);
-                    setClientSecret(res.data.clientSecret)
-               })
+          if (totalPrice > 0) {
+               axiosSecure.post('/create-payment-intent', { price: totalPrice })
+                    .then(res => {
+                         console.log(res.data.clientSecret);
+                         setClientSecret(res.data.clientSecret)
+                    })
+          }
 
      }, [axiosSecure, totalPrice])
 
@@ -54,24 +57,40 @@ const CheckoutForm = () => {
           }
 
           //Confirm Payment
-          const {paymentIntent, error:confirmError} = await stripe.confirmCardPayment(clientSecret, {
+          const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
                payment_method: {
                     card: card,
-                    billing_details:{
-                         email : user?.email || 'anonymous',
+                    billing_details: {
+                         email: user?.email || 'anonymous',
                          name: user?.displayName || 'anonymous'
                     }
                }
           })
 
-          if(confirmError){
+          if (confirmError) {
                console.log('confirm error');
           }
-          else{
+          else {
                console.log('Payment intent', paymentIntent);
-               if(paymentIntent.status === 'succeeded'){
+               if (paymentIntent.status === 'succeeded') {
                     console.log('transaction id', paymentIntent.id);
                     setTransactionId(paymentIntent.id)
+
+                    //now save the payment in the database
+                    const payment = {
+                         email: user.email,
+                         price: totalPrice,
+                         transactionId: paymentIntent.id,
+                         date: new Date(), //? utc date convert. use moment js to
+                         cartIds: cart.map(item => item._Id),
+                         menuItemIds: cart.map(item => item.menuId),
+                         status: 'pending'
+                    }
+                    const res = await axiosSecure.post('/payments', payment)
+                    refetch()
+                    if (res.data?.paymentResult?.insertedId) {
+                         toast.success('PaymentP Successfully ')
+                    }
                }
           }
      }
