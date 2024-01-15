@@ -16,6 +16,7 @@ import Additems from "../Pages/Dashbord/Admin/Additems";
 import ManageItems from "../Pages/Dashbord/Admin/ManageItems";
 import UpdateItem from "../Pages/Dashbord/Admin/UpdateItem";
 import Payment from "../Pages/Dashbord/User/Payments/Payment";
+import PaymentHistory from "../Pages/Dashbord/User/PaymentHistory";
 
 
 const bistroRouter = createBrowserRouter([
@@ -58,6 +59,10 @@ const bistroRouter = createBrowserRouter([
                {
                     path: 'payment',
                     element: <Payment />
+               },
+               {
+                    path: 'paymenthistory',
+                    element: <PaymentHistory />
                },
 
 

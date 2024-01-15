@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../Hooks/axiosSecureHook/useAxiosSecure";
 import useCart from "../../../../Hooks/useCart";
 import useAuth from "../../../../Hooks/useAuth";
 import toast from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 
 const CheckoutForm = () => {
@@ -15,6 +16,7 @@ const CheckoutForm = () => {
      const axiosSecure = useAxiosSecure()
      const { user } = useAuth()
      const [cart, refetch] = useCart()
+     const navigate = useNavigate();
      const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
 
@@ -82,14 +84,17 @@ const CheckoutForm = () => {
                          price: totalPrice,
                          transactionId: paymentIntent.id,
                          date: new Date(), //? utc date convert. use moment js to
-                         cartIds: cart.map(item => item._Id),
+                         cartIds: cart.map(item => item._id),
                          menuItemIds: cart.map(item => item.menuId),
                          status: 'pending'
                     }
                     const res = await axiosSecure.post('/payments', payment)
-                    refetch()
+                    console.log('Payment Saved', res.data);
+                    
+                    refetch();
                     if (res.data?.paymentResult?.insertedId) {
                          toast.success('PaymentP Successfully ')
+                         navigate('/dashbord/paymenthistory')
                     }
                }
           }
