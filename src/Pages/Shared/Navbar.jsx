@@ -4,15 +4,17 @@ import useAuth from "../../Hooks/useAuth";
 import userProfile from "../../assets/others/profile.png";
 import { FaCartShopping } from "react-icons/fa6";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navbar = () => {
      const { user, logOut } = useAuth();
      const [cart] = useCart()
+     const [isAdmin] = useAdmin()
 
      const handleLogout = () => {
           logOut()
-               .then(() => {})
+               .then(() => { })
                .catch(error => console.log(error))
      }
 
@@ -24,9 +26,16 @@ const Navbar = () => {
           <li className="text-white"><Link to="/secret">Secret</Link></li>
 
           {
+               user && !isAdmin && <li className="text-white"><Link to="/dashbord/userhome">Dashbord</Link></li>
+          }
+          {
+               user && isAdmin && <li className="text-white"><Link to="/dashbord/adminhome">Dashbord</Link></li>
+          }
+
+          {
                user ?
                     <>
-                         <li className="text-white"><Link to="/dashbord">Dashbord</Link></li>
+                         {/* <li className="text-white"><Link to="/dashbord">Dashbord</Link></li> */}
                          <button onClick={handleLogout} className="btn btn-neutral">LogOut</button>
                     </>
 
@@ -35,7 +44,7 @@ const Navbar = () => {
           <li>
                <Link to="/dashbord/cart">
                     <button className="btn">
-                         <FaCartShopping fontSize={30} className="mr-2"/>
+                         <FaCartShopping fontSize={30} className="mr-2" />
                          <div className="badge badge-secondary">+{cart.length}</div>
                     </button>
                </Link>

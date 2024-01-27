@@ -46,7 +46,7 @@ const bistroRouter = createBrowserRouter([
      },
      {
           path: 'dashbord',
-          element: <PrivateRoute><DashBord /></PrivateRoute>,
+          element: <DashBord />,
           children: [
                //User Routes
                {
