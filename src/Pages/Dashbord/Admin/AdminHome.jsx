@@ -11,13 +11,24 @@ const AdminHome = () => {
      const { user } = useAuth()
      const axiosSecure = useAxiosSecure();
 
-     const { data: stats } = useQuery({
+     const { data: stats = {} } = useQuery({
           queryKey: ['admin-stats'],
           queryFn: async () => {
                const res = await axiosSecure.get('/admin-stats')
                return res.data;
           }
      })
+
+     const {data: cartData = []} = useQuery({
+          queryKey: ['order-stats'],
+          queryFn: async () => {
+               const res = await axiosSecure.get('/order-stats')
+               return res.data;
+          }
+     })
+
+
+     
 
      return (
           <div className="text-3xl font-semibold">
@@ -38,7 +49,7 @@ const AdminHome = () => {
 
                               <div className="">
                                    <div className="stat-value">${stats?.revenue}</div>
-                                   <div>Revenue</div>
+                                   <div className="stat-desc">Revenue</div>
                               </div>
                          </div>
 
@@ -49,7 +60,7 @@ const AdminHome = () => {
 
                               <div className="">
                                    <div className="stat-value">{stats?.users}</div>
-                                   <div>Customers</div>
+                                   <div className="stat-desc">Customers</div>
                               </div>
                          </div>
 
@@ -77,6 +88,8 @@ const AdminHome = () => {
 
                     </div>
                </div>
+
+               
           </div>
 
 
